@@ -1,24 +1,156 @@
-import { Head, Notes } from 'mdx-deck'
-import { theme } from './theme'
+import { future, highlight } from '@mdx-deck/themes'
+// import Mermaid from './mermaid'
 
-export const themes = [ theme ]
+export const theme = {
+    ...future,
+    ...highlight
+}
 
+### Brown Bag Session
+
+
+# <span style={{color: 'yellow'}}>JavaScript</span> Design Patterns
+
+#### 28 April 2020
+### <span style={{color: 'magenta'}}>#QuarantineContent</span>
+---
+
+- Why Design Patterns?
+- List
+    - Constructor
+    - Module Pattern
+    - Revealing Module Pattern
+    - Observer
+    - Mediator
+    - Prototype
+    - Command
+    - Flyweight
+    - Composite
+    - Chain of Responsibility
+    - Publish Subscribe
+    - State Machine
+- Anti Patterns
+---
+<Header>
+
+# Design Patterns
+
+</Header>
+
+## Module Pattern
+
+---
+
+## Revealing Module Pattern
+
+---
+
+# JavaScript Patterns
+{/* <Mermaid
+        chart={`graph LR;
+A-->B;
+B-->C;
+B-->D[plop lanflz eknlzeknfz];
+      `}
+      /> */}
+
+---
+
+## This is my deck
+- One
+- Two
+- Three
+- Four
+
+---
+
+## The End
+{/* <Mermaid
+        chart={`sequenceDiagram
+    participant B as Browser
+    participant R as Realtime Service
+    participant AMS as Agent MS
+    participant A as Agent
+    B->>+R: Requests for a new WS connection
+    R->>R: Opens a websocket connection
+    R-->>B: Websocket connection is established
+    R->>R: Creates a unique connection ID
+    R->>AMS: MailBox message with webhook and (SINGLE) plugin config
+    AMS-->>A: MailBox message is relayed
+    loop On change in plugin data
+    	A-->>R: Updated data for a single plugin
+    	R-->>-B: Updated data for a single plugin
+    end
+`}
+/> */}
+---
+
+```jsx
+import React from 'react'
+
+export default props =>
+  <h1>Highlighting</h1>
+```
+---
+
+<ul>
+  <li>One</li>
+  <Steps>
+    <li>Two</li>
+    <li>Three</li>
+    <li>Four</li>
+  </Steps>
+</ul>
+
+---
+
+## One
+
+<Steps>
+
+## Two
+## Three
+
+</Steps>
+
+---
+
+## One
+
+<Steps>
+
+- Two
+- Three
+
+</Steps>
+
+---
 <Head>
-  <title>Presentation Title</title>
+  <title>JS Design Patterns</title>
 </Head>
 
-# Hello
+# Hello!
+
+--- 
+
+<Header>
+
+# JS Design Patterns
+
+</Header>
+
+<Footer>
+
+[@amandiersenflrs](https://twitter.com/amandiersenflrs)
+
+</Footer>
+
+# Questions?
 
 ---
 
-## Edit this file
+# References 
 
-To create your presentation
-
-<Notes>
-Create speaker notes with the Notes component
-</Notes>
-
----
-
-<https://github.com/jxnblk/mdx-deck>
+- [Essential JS Design Patterns](https://addyosmani.com/resources/essentialjsdesignpatterns/book/) by [@addyosmani](https://twitter.com/addyosmani)
+- [4 JavaScript Patterns You Should Know](https://scotch.io/bar-talk/4-javascript-design-patterns-you-should-know)
+- [Comprehensive Guide to JavaScript Patterns](https://www.toptal.com/javascript/comprehensive-guide-javascript-design-patterns)
