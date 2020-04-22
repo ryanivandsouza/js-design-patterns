@@ -8,7 +8,9 @@
     "help": "mdx-deck"
   },
   "devDependencies": {
-    "mdx-deck": "^4.1.1"
+    "code-surfer": "^3.1.1",
+    "mdx-deck": "^4.1.1",
+    "raw-loader": "^4.0.1"
   },
   "dependencies": {
     "mermaid": "^8.5.0",

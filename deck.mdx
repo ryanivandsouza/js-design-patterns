@@ -1,5 +1,11 @@
 import { future, highlight } from '@mdx-deck/themes'
+import { Horizontal } from 'mdx-deck'
+
+import { CodeSurferColumns, CodeSurfer, Step } from 'code-surfer'
+import { nightOwl } from "@code-surfer/themes"
+
 import Mermaid from './mermaid'
+import Layout from './layout'
 
 export const theme = {
     ...future,
@@ -17,9 +23,9 @@ export const theme = {
 
 - Why Design Patterns?
 - List
-    - Constructor
     - Module Pattern
     - Revealing Module Pattern
+    - ES6 Modules
     - Observer
     - Mediator
     - Prototype
@@ -30,14 +36,73 @@ export const theme = {
     - Publish Subscribe
     - State Machine
 - Anti Patterns
+
 ---
-<Header>
 
-# Design Patterns
+<CodeSurferColumns theme={nightOwl}>
 
-</Header>
+<Step subtitle="WHY">
 
-## Module Pattern
+## MODULE PATTERN
+
+```js
+
+// JavaScript has leaky global scope
+
+// Need public and private encapsulation
+
+// Avoid function names conflicting
+
+```
+
+</Step>
+
+<Step subtitle="IMPLEMENTATION">
+
+## MODULE PATTERN
+
+```js showNumbers
+var myNamespace = (function () {
+
+  // A private counter variable
+  var privateVariable = 0;
+
+  // A private function which logs args
+  var privateMethod = function( foo ) {
+      console.log( foo );
+  };
+
+  return {
+    // A public variable
+    publicVariable: "foo",
+
+    // A public function utilizing privates
+    publicFunction: function( bar ) {
+      // Increment our private counter
+      privateVariable += 1;
+
+      // Call our private method using bar
+      privateMethod( bar );
+    }
+  };
+})();
+```
+
+</Step>
+
+<Step subtitle="USAGE">
+
+## MODULE PATTERN
+
+```js showNumbers 
+myNamespace.publicVariable;
+myNamespace.publicFunction('foo');
+```
+
+</Step>
+
+
+</CodeSurferColumns>
 
 ---
 
@@ -53,17 +118,6 @@ B-->D[plop lanflz eknlzeknfz];
       `}
       />
 
----
-
-## This is my deck
-- One
-- Two
-- Three
-- Four
-
----
-
-## The End
 ---
 
 ```jsx
