@@ -1,5 +1,5 @@
 import { future, highlight } from '@mdx-deck/themes'
-// import Mermaid from './mermaid'
+import Mermaid from './mermaid'
 
 export const theme = {
     ...future,
@@ -46,13 +46,12 @@ export const theme = {
 ---
 
 # JavaScript Patterns
-{/* <Mermaid
-        chart={`graph LR;
+<Mermaid chart={`graph LR;
 A-->B;
 B-->C;
 B-->D[plop lanflz eknlzeknfz];
       `}
-      /> */}
+      />
 
 ---
 
@@ -65,24 +64,12 @@ B-->D[plop lanflz eknlzeknfz];
 ---
 
 ## The End
-{/* <Mermaid
-        chart={`sequenceDiagram
-    participant B as Browser
-    participant R as Realtime Service
-    participant AMS as Agent MS
-    participant A as Agent
-    B->>+R: Requests for a new WS connection
-    R->>R: Opens a websocket connection
-    R-->>B: Websocket connection is established
-    R->>R: Creates a unique connection ID
-    R->>AMS: MailBox message with webhook and (SINGLE) plugin config
-    AMS-->>A: MailBox message is relayed
-    loop On change in plugin data
-    	A-->>R: Updated data for a single plugin
-    	R-->>-B: Updated data for a single plugin
-    end
-`}
-/> */}
+<Mermaid chart={`graph LR;
+A-->B;
+B-->C;
+B-->D[plop lanflz eknlzeknfz];
+      `}
+/>
 ---
 
 ```jsx
