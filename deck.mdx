@@ -2,7 +2,7 @@ import { future, highlight } from '@mdx-deck/themes'
 import { Horizontal } from 'mdx-deck'
 
 import { CodeSurferColumns, CodeSurfer, Step } from 'code-surfer'
-import { nightOwl } from "@code-surfer/themes"
+import { github } from "@code-surfer/themes"
 
 import Mermaid from './mermaid'
 import Layout from './layout'
@@ -39,7 +39,7 @@ export const theme = {
 
 ---
 
-<CodeSurferColumns theme={nightOwl}>
+<CodeSurferColumns theme={github}>
 
 <Step subtitle="WHY">
 
@@ -106,7 +106,72 @@ myNamespace.publicFunction('foo');
 
 ---
 
-## Revealing Module Pattern
+<CodeSurferColumns theme={github}>
+
+<Step subtitle="WHY">
+
+## REVEALING MODULE PATTERN
+
+```js
+
+// MODULE PATTERN slightly improved
+
+// No repeating the name of the main object
+
+// No object literal notation, for making things public
+
+```
+
+</Step>
+
+<Step subtitle="IMPLEMENTATION">
+
+## REVEALING MODULE PATTERN
+
+```js showNumbers
+var myRevealingModule = (function () {
+        var privateVar = "Ben Cherry",
+            publicVar = "Hey there!";
+ 
+        function privateFunction() {
+            console.log( "Name:" + privateVar );
+        }
+ 
+        function publicSetName( strName ) {
+            privateVar = strName;
+        }
+ 
+        function publicGetName() {
+            privateFunction();
+        }
+ 
+        // Reveal public pointers to
+        // private functions and properties
+        return {
+            setName: publicSetName,
+            greeting: publicVar,
+            getName: publicGetName
+        };
+    })();
+ 
+myRevealingModule.setName( "Paul Kinlan" );
+```
+
+</Step>
+
+<Step subtitle="USAGE">
+
+## MODULE PATTERN
+
+```js showNumbers 
+myNamespace.publicVariable;
+myNamespace.publicFunction('foo');
+```
+
+</Step>
+
+
+</CodeSurferColumns>
 
 ---
 
@@ -120,12 +185,17 @@ B-->D[plop lanflz eknlzeknfz];
 
 ---
 
+<CodeSurfer>
+
 ```jsx
 import React from 'react'
 
 export default props =>
   <h1>Highlighting</h1>
 ```
+
+</CodeSurfer>
+
 ---
 
 <ul>
