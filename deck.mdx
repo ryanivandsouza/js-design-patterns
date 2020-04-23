@@ -1,14 +1,15 @@
-import { future, highlight } from '@mdx-deck/themes'
+import { future } from '@mdx-deck/themes'
 import { Horizontal } from 'mdx-deck'
 
 import { CodeSurferColumns, CodeSurfer, Step } from 'code-surfer'
-import { github } from "@code-surfer/themes"
+import { nightOwl } from "@code-surfer/themes"
 
 import Mermaid from './mermaid'
 import Layout from './layout'
 
 export const theme = {
-    ...future
+    ...future,
+    ...nightOwl
 }
 
 ### Brown Bag Session
@@ -39,7 +40,7 @@ export const theme = {
 
 ---
 
-<CodeSurferColumns theme={github}>
+<CodeSurferColumns>
 
 <Step subtitle="WHY">
 
@@ -106,7 +107,7 @@ myNamespace.publicFunction('foo');
 
 ---
 
-<CodeSurferColumns theme={github}>
+<CodeSurferColumns>
 
 <Step subtitle="WHY">
 
@@ -161,7 +162,7 @@ myRevealingModule.setName( "Paul Kinlan" );
 
 <Step subtitle="USAGE">
 
-## MODULE PATTERN
+## REVEALING MODULE PATTERN
 
 ```js showNumbers 
 myNamespace.publicVariable;
