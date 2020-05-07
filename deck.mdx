@@ -16,27 +16,109 @@ export const theme = {
 
 # <span style={{color: 'yellow'}}>JavaScript</span> Design Patterns
 
-#### 28 April 2020
+#### 7 May 2020
 
 #### <span style={{color: 'magenta'}}>#QuarantineContent</span>
 
 ---
 
+## <span style={{color: 'yellow'}}>JavaScript</span>
+
+# 🎉 🎈🥳 25 years 🎂
+
+### september 1995
+---
+
 - Why Design Patterns?
+- Basics
 - List
     - Module Pattern
     - Revealing Module Pattern
     - ES6 Modules
+    - Singleton
     - Observer
     - Mediator
-    - Prototype
-    - Command
-    - Flyweight
-    - Composite
-    - Chain of Responsibility
-    - Publish Subscribe
-    - State Machine
-- Anti Patterns
+    - <span style={{color: 'grey'}}>Prototype</span>
+    - <span style={{color: 'grey'}}>Command</span>
+    - <span style={{color: 'grey'}}>Flyweight</span>
+    - <span style={{color: 'grey'}}>Composite</span>
+    - <span style={{color: 'grey'}}>Chain of Responsibility</span>
+    - <span style={{color: 'grey'}}>State Machine</span>
+- <span style={{color: 'grey'}}>Anti Patterns</span>
+
+---
+
+## Why Design Patterns?
+
+<Steps>
+
+- REPEATABILITY: Solution to a commonly occurring problem
+
+- FAMILIARITY: Make code easy to read and maintain
+
+- BEST PRACTICES: Enforce guidelines and boundaries
+
+</Steps>
+
+---
+
+<CodeSurferColumns>
+
+<Step subtitle="BASICS">
+
+## LEXICAL SCOPING
+
+```js
+
+// dino is a variable declared in global scope
+var mascot = 🐱‍🐉
+
+function init() {
+  // name is a local variable created by init
+  var name = 'Mozilla ' + mascot;
+
+  function displayName() {
+    alert(name); // use variable declared in the parent function
+  }
+
+  displayName();
+}
+
+init();
+
+```
+
+</Step>
+
+<Step subtitle="BASICS">
+
+## Closures
+
+```js
+
+// dino is a variable declared in global scope
+var mascot = 🐱‍🐉
+
+function init() {
+  // name is a local variable created by init
+  var name = 'Mozilla ' + mascot;
+
+  function displayName() { // 👈 this is a closure
+    alert(name); // use variable declared in the parent function
+  }
+
+  displayName();
+}
+
+init();
+
+```
+
+</Step>
+
+</CodeSurferColumns>
+
+---
 
 ---
 
@@ -63,29 +145,27 @@ export const theme = {
 ## MODULE PATTERN
 
 ```js showNumbers
-var myNamespace = (function () {
+var counter = (function() {
 
-  // A private counter variable
-  var privateVariable = 0;
+    var privateCounter = 0;
 
-  // A private function which logs args
-  var privateMethod = function( foo ) {
-      console.log( foo );
-  };
-
-  return {
-    // A public variable
-    publicVariable: "foo",
-
-    // A public function utilizing privates
-    publicFunction: function( bar ) {
-      // Increment our private counter
-      privateVariable += 1;
-
-      // Call our private method using bar
-      privateMethod( bar );
+    function changeBy(val) {
+        privateCounter += val;
     }
-  };
+
+    return {
+        increment: function() {
+            changeBy(1);
+        },
+
+        decrement: function() {
+            changeBy(-1);
+        },
+
+        value: function() {
+            return privateCounter;
+        }
+    };
 })();
 ```
 
@@ -96,12 +176,17 @@ var myNamespace = (function () {
 ## MODULE PATTERN
 
 ```js showNumbers 
-myNamespace.publicVariable;
-myNamespace.publicFunction('foo');
+console.log(counter.value());  // 0.
+
+counter.increment();
+counter.increment();
+console.log(counter.value());  // 2.
+
+counter.decrement();
+console.log(counter.value());  // 1.
 ```
 
 </Step>
-
 
 </CodeSurferColumns>
 
@@ -130,32 +215,32 @@ myNamespace.publicFunction('foo');
 ## REVEALING MODULE PATTERN
 
 ```js showNumbers
-var myRevealingModule = (function () {
-        var privateVar = "Ben Cherry",
-            publicVar = "Hey there!";
- 
-        function privateFunction() {
-            console.log( "Name:" + privateVar );
-        }
- 
-        function publicSetName( strName ) {
-            privateVar = strName;
-        }
- 
-        function publicGetName() {
-            privateFunction();
-        }
- 
-        // Reveal public pointers to
-        // private functions and properties
-        return {
-            setName: publicSetName,
-            greeting: publicVar,
-            getName: publicGetName
-        };
-    })();
- 
-myRevealingModule.setName( "Paul Kinlan" );
+var counter = (function() {
+
+    var privateCounter = 0;
+
+    function changeBy(val) {
+        privateCounter += val;
+    }
+
+    function incrementp() { 
+        changeBy(1);
+    }
+
+    function decrementp() { 
+        changeBy(-1);
+    }
+
+    function valuep () {
+        return privateCounter;
+    }
+
+    return {
+        increment: incrementp,
+        decrement: decrementp,
+        value: valuep
+    };
+})();
 ```
 
 </Step>
@@ -165,8 +250,14 @@ myRevealingModule.setName( "Paul Kinlan" );
 ## REVEALING MODULE PATTERN
 
 ```js showNumbers 
-myNamespace.publicVariable;
-myNamespace.publicFunction('foo');
+console.log(counter.value());  // 0.
+
+counter.increment();
+counter.increment();
+console.log(counter.value());  // 2.
+
+counter.decrement();
+console.log(counter.value());  // 1.
 ```
 
 </Step>
@@ -176,82 +267,375 @@ myNamespace.publicFunction('foo');
 
 ---
 
-# JavaScript Patterns
-<Mermaid chart={`graph LR;
-A-->B;
-B-->C;
-B-->D[plop lanflz eknlzeknfz];
-      `}
-      />
+<CodeSurferColumns>
 
----
+<Step subtitle="WHY">
 
-<CodeSurfer>
+## ES6 MODULES
 
-```jsx
-import React from 'react'
+```js
+// Piece of code that is executed once it is loaded.
 
-export default props =>
-  <h1>Highlighting</h1>
+// There may be declarations (variable, function, etc.).
+
+// By default, these declarations stay local to the module.
+
+// Can mark some of them as exports, so other modules can import them.
+
+// A module can import things from other modules.
+// It refers to those modules via module specifiers, strings that are either:
+
+    🔵 // Relative paths ('../model/user')
+
+    🔵 // Absolute paths ('/lib/js/helpers')
+
+    🔵 // Names ('util')
+
+    🔵 // Modules are singletons
 ```
 
-</CodeSurfer>
+</Step>
+
+<Step subtitle="IMPLEMENTATION">
+
+## ES6 MODULES
+
+```js showNumbers
+// counter.js
+
+var privateCounter = 0;
+
+function changeBy(val) {
+    privateCounter += val;
+}
+
+export function increment() { 
+    changeBy(1);
+}
+
+export function decrement() { 
+    changeBy(-1);
+}
+
+export function value () {
+    return privateCounter;
+}
+```
+
+</Step>
+
+<Step subtitle="USAGE">
+
+## ES6 MODULES
+
+```js showNumbers 
+// main.js
+
+import * as counter from 'counter'
+
+console.log(counter.value());  // 0.
+
+counter.increment();
+counter.increment();
+console.log(counter.value());  // 2.
+
+counter.decrement();
+console.log(counter.value());  // 1.
+```
+
+</Step>
+
+
+</CodeSurferColumns>
 
 ---
 
-<ul>
-  <li>One</li>
-  <Steps>
-    <li>Two</li>
-    <li>Three</li>
-    <li>Four</li>
-  </Steps>
-</ul>
+<CodeSurferColumns>
+
+<Step subtitle="WHY">
+
+## SINGLETON PATTERN
+
+```js
+
+⛔ // Restricts instantiation of a class to a single object
+
+🛂 // Instantiation can be controlled and deferred
+
+1️⃣ // Useful when we need exactly one object to coordinate others across a system
+
+🚫 // If required, then review design. It is sign of increasing tight coupling 
+
+```
+
+</Step>
+
+<Step subtitle="IMPLEMENTATION">
+
+## SINGLETON PATTERN
+
+```js showNumbers
+var singletonCounter = (function() {
+    var instance;
+    var privateCounter = 0;
+
+    function changeBy(val) {
+        privateCounter += val;
+    }
+
+    function incrementp() { 
+        changeBy(1);
+    }
+
+    function decrementp() { 
+        changeBy(-1);
+    }
+
+    function valuep () {
+        return privateCounter;
+    }
+
+    function init () {
+        return {
+            increment: incrementp,
+            decrement: decrementp,
+            value: valuep
+        };
+    }
+
+    return {
+        getInstance: function () {
+            if (!instance) { instance = init(); }
+
+            return instance();
+        }
+    };
+})();
+```
+
+</Step>
+
+<Step subtitle="USAGE">
+
+## SINGLETON PATTERN
+
+```js showNumbers
+var counter = singletonCounter.getInstance();
+
+console.log(counter.value());  // 0.
+
+counter.increment();
+counter.increment();
+console.log(counter.value());  // 2.
+
+counter.decrement();
+console.log(counter.value());  // 1.
+```
+
+</Step>
+
+</CodeSurferColumns>
 
 ---
 
-## One
+<CodeSurferColumns>
 
-<Steps>
+<Step subtitle="WHY">
 
-## Two
-## Three
+## OBSERVER PATTERN
 
-</Steps>
+```js
+
+📃 // Subject maintains list of observers - objects depending on its state
+
+📢 // Subject broadcasts notification to its observers
+
+👂 // Observers listen to notification from the subject
+
+🤙 // We can register or unregister observers from getting notified by the subject
+
+```
+
+</Step>
+
+<Step subtitle="IMPLEMENTATION - SUBJECT">
+
+## OBSERVER PATTERN
+
+```js showNumbers
+var Subject = function() {
+    var observers = [];
+
+    function subscribe (observer) {
+        observers.push(observer)
+    }
+
+    function unsubscribe (observer) { 
+        var index = this.observers.indexOf(observer, 0);
+        this.observers.removeAt(index);
+    }
+
+    function broadcast (context) {
+        observers.forEach(function (o) {
+            o.update && o.update(context);
+        })
+    }
+
+    return {
+        subscribe,
+        unsubscribe,
+        broadcast
+    };
+})();
+```
+
+</Step>
+
+<Step subtitle="IMPLEMENTATION - OBSERVER">
+
+## OBSERVER PATTERN
+
+```js showNumbers
+var o1 = {
+    update: function(context) {
+        console.log(context);
+    }
+}
+
+var o2 = {
+    update: function(context) {
+        // update DOM with context
+    }
+}
+```
+
+</Step>
+
+<Step subtitle="USAGE">
+
+## OBSERVER PATTERN
+
+```js showNumbers
+var s = new Subject();
+s.subscribe(o1);
+s.broadcast("first"); // o1 gets notified
+
+s.subscribe(o2);
+s.broadcast("two"); // o1 and o2, both get notified
+
+s.unsubscribe(o1);
+s.broadcast("three"); // only o2 gets notified
+```
+
+</Step>
+
+</CodeSurferColumns>
 
 ---
 
-## One
+<CodeSurferColumns>
 
-<Steps>
+<Step subtitle="WHY">
 
-- Two
-- Three
+## MEDIATOR PATTERN
 
-</Steps>
+```js
+
+👨🏾‍🤝‍👨🏾 // Similar but different from Observer pattern
+
+🔓 // Promotes loose coupling, components don't talk to each other directly
+
+⏺ // Interaction is handled through this central point
+
+🔒 // Encapsulates workflow details about how components interact with each other
+
+```
+
+</Step>
+
+<Step subtitle="IMPLEMENTATION - COLLEAGUE">
+
+## MEDIATOR PATTERN
+
+```js showNumbers
+var Colleague = function(name) {
+    this.name = name;
+    this.mediator = null;
+
+    function send (message, to) {
+        this.mediator.send(message, this, to);
+    }
+
+    function receive (message, from) { 
+        // handle message received
+        console.log(from.name + " to " + this.name + ": " + message);
+    }
+
+    return {
+        send,
+        receive
+    };
+};
+```
+
+</Step>
+
+<Step subtitle="IMPLEMENTATION - MEDIATOR">
+
+## MEDIATOR PATTERN
+
+```js showNumbers
+var Mediator = function () {
+    var colleagues = {};
+
+    return {
+        register: function(colleague) {
+            colleagues[colleague.name] = colleague;
+            colleagues.mediator = this;
+        },
+    }
+
+    send: function(message, from, to) {
+        if (to) {                      // single message
+            to.receive(message, from);    
+        } else {                       // broadcast message
+            for (key in colleagues) {   
+                if (colleagues[key] !== from) {
+                    colleagues[key].receive(message, from);
+                }
+            }
+        }
+    }
+}
+```
+
+</Step>
+
+<Step subtitle="USAGE">
+
+## OBSERVER PATTERN
+
+```js showNumbers
+    var yoko = new Colleague("Yoko");
+    var john = new Colleague("John");
+    var paul = new Colleague("Paul");
+    var ringo = new Colleague("Ringo");
+
+    var mediator = new Mediator();
+    mediator.register(yoko);
+    mediator.register(john);
+    mediator.register(paul);
+    mediator.register(ringo);
+
+    yoko.send("All you need is love.");
+    yoko.send("I love you John.");
+    john.send("Hey, no need to broadcast", yoko);
+    paul.send("Ha, I heard that!");
+    ringo.send("Paul, what do you think?", paul);
+```
+
+</Step>
+
+</CodeSurferColumns>
 
 ---
-<Head>
-  <title>JS Design Patterns</title>
-</Head>
-
-# Hello!
-
---- 
-
-<Header>
-
-# JS Design Patterns
-
-</Header>
-
-# Questions?
-
----
-
-# References 
-
-- [Essential JS Design Patterns](https://addyosmani.com/resources/essentialjsdesignpatterns/book/) by [@addyosmani](https://twitter.com/addyosmani)
-- [4 JavaScript Patterns You Should Know](https://scotch.io/bar-talk/4-javascript-design-patterns-you-should-know)
-- [Comprehensive Guide to JavaScript Patterns](https://www.toptal.com/javascript/comprehensive-guide-javascript-design-patterns)
-- [State Machine Design pattern](https://medium.com/datadriveninvestor/state-machine-design-pattern-why-how-example-through-spring-state-machine-part-1-f13872d68c2d)
